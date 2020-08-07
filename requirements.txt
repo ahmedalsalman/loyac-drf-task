@@ -1,0 +1,15 @@
+asgiref==3.2.10
+cffi==1.14.1
+cryptography==3.0
+Django==3.1
+django-cors-headers==3.4.0
+django-filter==2.3.0
+djangorestframework==3.11.1
+djangorestframework-simplejwt==4.4.0
+drf-jwt==1.16.2
+Markdown==3.2.2
+pycparser==2.20
+PyJWT==1.7.1
+pytz==2020.1
+six==1.15.0
+sqlparse==0.3.1
