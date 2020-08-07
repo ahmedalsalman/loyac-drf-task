@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from loyac_api import views
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
@@ -22,8 +23,10 @@ from rest_framework_simplejwt.views import (
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('register/staff/', views.StaffRegister.as_view(), name="staff_register"),
+    path('register/applicant/', views.ApplicantRegister.as_view(), name="applicant_register"),
+    path('login/', TokenObtainPairView.as_view(), name="login"),    
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
-
 ]
 
