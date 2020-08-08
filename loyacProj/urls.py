@@ -16,6 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from loyac_api import views
+from django.conf import settings
+from django.conf.urls.static import static
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
@@ -26,7 +28,12 @@ urlpatterns = [
     path('register/staff/', views.StaffRegister.as_view(), name="staff_register"),
     path('register/applicant/', views.ApplicantRegister.as_view(), name="applicant_register"),
     path('login/', TokenObtainPairView.as_view(), name="login"),    
-    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    path('api/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+
+    path('newprogram/', views.ProgramCreate.as_view(), name="create_program"),
+    path('programs/', views.ProgramList.as_view(), name="program-list"),
+    path('apply/<int:program_id>/', views.Apply.as_view(), name="apply"),
+    path('programs/history/', views.ProgramHistory.as_view(), name="history"),
+
 ]
 
+urlpatterns+=static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

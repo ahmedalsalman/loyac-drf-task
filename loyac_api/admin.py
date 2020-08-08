@@ -4,7 +4,7 @@ from django.contrib.auth.models import Group
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 
-from loyac_api.models import CustomUser
+from loyac_api.models import CustomUser, Program, Application
 
 
 class UserCreationForm(forms.ModelForm):
@@ -72,4 +72,6 @@ class UserAdmin(BaseUserAdmin):
     filter_horizontal = ()
 
 admin.site.register(CustomUser, UserAdmin)
+admin.site.register(Program)
+admin.site.register(Application)
 admin.site.unregister(Group)
