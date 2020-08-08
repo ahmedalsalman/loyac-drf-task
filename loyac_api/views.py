@@ -29,10 +29,9 @@ class Apply(CreateAPIView):
     def perform_create(self, serializer):
         serializer.save(applicant = self.request.user, program_id = self.kwargs['program_id'])
 
-class ProgramHistory(RetrieveAPIView):
+class ProgramHistory(ListAPIView):
     serializer_class = ProgramHistorySerializer
     permission_classes = [IsAuthenticated]
+    queryset = Application.objects.all()
 
-    def get_object(self):
-        return Application.objects.get(applicant = self.request.user)    
 

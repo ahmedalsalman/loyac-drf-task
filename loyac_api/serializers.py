@@ -43,8 +43,10 @@ class ApplicationSerializer(serializers.ModelSerializer):
 		fields = []		
 
 class ProgramHistorySerializer(serializers.ModelSerializer):
-	program = ProgramSerializer(read_only=True)
-
+	applicant = serializers.SerializerMethodField()
 	class Meta:
 		model = Application
-		fields = ['program', 'points']
+		fields = ['program', 'points', 'applicant']
+	def get_applicant(self,obj):
+		return obj.applicant.email
+		

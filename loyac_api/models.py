@@ -75,7 +75,7 @@ AGE_GROUPS = (
 
 class Program(models.Model):
 	name = models.CharField(max_length=150)
-	image = models.ImageField()
+	image = models.ImageField(null=True, blank=True)
 	description = models.TextField()
 	age_group = models.CharField(choices=AGE_GROUPS,max_length=5)
 	date_created = models.DateTimeField(default=datetime.now())
