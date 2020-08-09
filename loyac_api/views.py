@@ -32,6 +32,6 @@ class Apply(CreateAPIView):
 class ProgramHistory(ListAPIView):
     serializer_class = ProgramHistorySerializer
     permission_classes = [IsAuthenticated]
-    queryset = Application.objects.all()
+    queryset = Program.objects.all()
 
 

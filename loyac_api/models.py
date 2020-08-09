@@ -3,6 +3,9 @@ from django.contrib.auth.models import (
 	UserManager, AbstractBaseUser
 )
 from datetime import datetime
+from django.core import mail
+from django.dispatch import receiver
+from django.db.models.signals import post_save
 
 
 class CustomUserManager(UserManager):
@@ -98,6 +101,27 @@ class Application(models.Model):
 	
 	def __str__(self):
 		return "%s: %s" % (self.applicant.email, str(self.program.name))
+
+@receiver(post_save, sender=Application)
+def create_user_application(sender, instance, created, **kwargs):
+	if created:
+		connection = mail.get_connection()
+
+		# Manually open the connection
+		connection.open()
+
+		# Construct an email message that uses the connection
+		email1 = mail.EmailMessage(
+			'Hello',
+			'Sending an Email from a signal',
+			'loyac.user@gmail.com',
+			['ahmedealsalman@gmail.com'],
+			connection=connection,
+		)
+		email1.send() # Send the email
+		# The connection was already open so send_messages() doesn't close it.
+		# We need to manually close the connection.
+		connection.close()
 
 #To create a signal and send an email to the superuser to give the request.user is_staff permissions.
 class StaffUserRequest(models.Model):
